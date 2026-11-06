@@ -71,6 +71,7 @@ function reboot_child_load_includes() {
 		'/inc/meta-boxes.php',
 		'/inc/template-tags.php',
 		'/inc/pages.php',
+		'/inc/head.php',
 	);
 
 	foreach ( $includes as $include ) {

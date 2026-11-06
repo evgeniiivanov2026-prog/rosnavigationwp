@@ -23,9 +23,16 @@ $reboot_child_blog  = RebootChild\page_url( 'blog' );
 	<?php if ( $reboot_child_posts->have_posts() ) : ?>
 		<div class="resume-cards">
 			<?php
+			$reboot_child_hero  = RebootChild\hero_image_src();
+			$reboot_child_eager = ( '' === $reboot_child_hero );
 			while ( $reboot_child_posts->have_posts() ) :
 				$reboot_child_posts->the_post();
-				get_template_part( 'template-parts/resume/card', null, array( 'heading' => 'h3' ) );
+				$reboot_child_card = array( 'heading' => 'h3' );
+				if ( $reboot_child_eager && has_post_thumbnail() ) {
+					$reboot_child_card['loading'] = 'eager';
+					$reboot_child_eager          = false;
+				}
+				get_template_part( 'template-parts/resume/card', null, $reboot_child_card );
 			endwhile;
 			?>
 		</div>

@@ -67,12 +67,25 @@ function preload_hero(): void {
 	if ( ! is_front_page() ) {
 		return;
 	}
+	$id  = hero_image_id();
 	$src = hero_image_src();
 	if ( '' === $src ) {
 		return;
 	}
 
-	echo '<link rel="preload" as="image" href="' . esc_url( $src ) . '">' . "\n";
+	$attr = ' rel="preload" as="image" href="' . esc_url( $src ) . '" fetchpriority="high"';
+	if ( $id > 0 ) {
+		$srcset = wp_get_attachment_image_srcset( $id, 'large' );
+		$sizes  = wp_get_attachment_image_sizes( $id, 'large' );
+		if ( is_string( $srcset ) && '' !== $srcset ) {
+			$attr .= ' imagesrcset="' . esc_attr( $srcset ) . '"';
+			if ( is_string( $sizes ) && '' !== $sizes ) {
+				$attr .= ' imagesizes="' . esc_attr( $sizes ) . '"';
+			}
+		}
+	}
+
+	echo '<link' . $attr . '>' . "\n";
 }
 
 /**

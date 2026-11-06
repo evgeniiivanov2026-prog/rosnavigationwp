@@ -28,9 +28,15 @@ if ( '' === $title ) {
 		<?php if ( have_posts() ) : ?>
 			<div class="resume-cards">
 				<?php
+				$reboot_child_eager = true;
 				while ( have_posts() ) :
 					the_post();
-					get_template_part( 'template-parts/resume/card', null, array( 'heading' => 'h2' ) );
+					$reboot_child_card = array( 'heading' => 'h2' );
+					if ( $reboot_child_eager && has_post_thumbnail() ) {
+						$reboot_child_card['loading'] = 'eager';
+						$reboot_child_eager          = false;
+					}
+					get_template_part( 'template-parts/resume/card', null, $reboot_child_card );
 				endwhile;
 				?>
 			</div>
