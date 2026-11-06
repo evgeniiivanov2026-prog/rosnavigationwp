@@ -18,20 +18,22 @@ if ( isset( $args['heading'] ) && 'h2' === $args['heading'] ) {
 $reboot_child_tags = get_the_tags();
 $reboot_child_post = get_post();
 $reboot_child_has_text = $reboot_child_post instanceof \WP_Post && ( has_excerpt( $reboot_child_post ) || '' !== trim( (string) $reboot_child_post->post_content ) );
+$reboot_child_loading  = ( isset( $args['loading'] ) && 'eager' === $args['loading'] ) ? 'eager' : 'lazy';
 ?>
 <article <?php post_class( 'resume-card' ); ?>>
 	<?php if ( has_post_thumbnail() ) : ?>
 		<a class="resume-card__media" href="<?php the_permalink(); ?>" tabindex="-1" aria-hidden="true">
 			<?php
-			the_post_thumbnail(
-				'medium_large',
-				array(
-					'class'    => 'resume-card__image',
-					'alt'      => '',
-					'loading'  => 'lazy',
-					'decoding' => 'async',
-				)
+			$reboot_child_image_attr = array(
+				'class'    => 'resume-card__image',
+				'alt'      => '',
+				'loading'  => $reboot_child_loading,
+				'decoding' => 'async',
 			);
+			if ( 'eager' === $reboot_child_loading ) {
+				$reboot_child_image_attr['fetchpriority'] = 'high';
+			}
+			the_post_thumbnail( 'medium_large', $reboot_child_image_attr );
 			?>
 		</a>
 	<?php endif; ?>

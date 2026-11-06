@@ -307,9 +307,41 @@ body.wp-child-theme-reboot_child .scrolltop:before {
 	height: auto;
 }
 
+.resume-hero__media {
+	justify-self: center;
+	width: min(100%, 26rem);
+}
+
 .resume-hero__photo {
 	width: 100%;
+	aspect-ratio: 960 / 1286;
+	object-fit: cover;
 	border-radius: var(--resume-radius);
+	background: var(--resume-line);
+}
+
+.resume-page-head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 1rem 1.25rem;
+	margin: 0 0 2rem;
+}
+
+.resume-page-head__title {
+	flex: 1 1 12rem;
+	margin-bottom: 0;
+}
+
+.resume-page-head__photo {
+	width: 6.5rem;
+	height: 6.5rem;
+	flex: 0 0 auto;
+	aspect-ratio: 1;
+	object-fit: cover;
+	object-position: center 18%;
+	border-radius: 999px;
+	box-shadow: 0 0 0 1px var(--resume-line);
 }
 
 .resume-button {
@@ -324,6 +356,10 @@ body.wp-child-theme-reboot_child .scrolltop:before {
 	color: var(--resume-accent-ink);
 	text-decoration: none;
 	font-weight: 700;
+}
+
+body.wp-child-theme-reboot_child a.resume-button {
+	color: var(--resume-accent-ink);
 }
 
 .resume a.resume-button--ghost {
@@ -530,6 +566,10 @@ body.wp-child-theme-reboot_child .scrolltop:before {
 	.resume-hero {
 		grid-template-columns: minmax(0, 1.4fr) minmax(12rem, 0.8fr);
 		padding: 2rem;
+	}
+
+	.resume-hero__media {
+		justify-self: end;
 	}
 
 	.resume-facts {

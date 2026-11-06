@@ -72,7 +72,14 @@ function preload_hero(): void {
 		return;
 	}
 
-	echo '<link rel="preload" as="image" href="' . esc_url( $src ) . '">' . "\n";
+	$attr   = ' rel="preload" as="image" href="' . esc_url( $src ) . '" fetchpriority="high"';
+	$srcset = hero_image_srcset();
+	if ( '' !== $srcset ) {
+		$attr .= ' imagesrcset="' . esc_attr( $srcset ) . '"';
+		$attr .= ' imagesizes="' . esc_attr( hero_slot_sizes() ) . '"';
+	}
+
+	echo '<link' . $attr . '>' . "\n";
 }
 
 /**
@@ -149,6 +156,7 @@ function hero_image(): array {
 
 	$url = mod_string( 'reboot_child_hero_image' );
 	if ( '' === $url ) {
+		$src = bundled_portrait_url( PORTRAIT_LARGE );
 		return array( $id, $src );
 	}
 
@@ -178,6 +186,133 @@ function hero_image_src(): string {
 function hero_image_id(): int {
 	$image = hero_image();
 	return $image[0];
+}
+
+const PORTRAIT_LARGE  = 'assets/images/portrait.jpg';
+const PORTRAIT_SMALL  = 'assets/images/portrait-480.jpg';
+const PORTRAIT_WIDTH  = 960;
+const PORTRAIT_HEIGHT = 1286;
+
+/**
+ * Sizes for the landing portrait. Preload must use the same value.
+ */
+function hero_slot_sizes(): string {
+	return '(min-width: 700px) 26rem, 92vw';
+}
+
+/**
+ * Child-theme file URL with a cache-busting version, or empty when missing.
+ *
+ * @param string $relative Path relative to the child theme root.
+ */
+function bundled_portrait_url( string $relative ): string {
+	$path = get_stylesheet_directory() . '/' . ltrim( $relative, '/' );
+	if ( ! is_readable( $path ) ) {
+		return '';
+	}
+
+	$url = get_stylesheet_directory_uri() . '/' . ltrim( $relative, '/' );
+	return add_query_arg( 'ver', asset_version( $relative ), $url );
+}
+
+/**
+ * Srcset for the hero photo.
+ *
+ * An attachment uses WordPress sizes. The bundled portrait uses its two files.
+ * A customizer URL that is not an attachment has no srcset.
+ */
+function hero_image_srcset(): string {
+	$id = hero_image_id();
+	if ( $id > 0 ) {
+		$srcset = wp_get_attachment_image_srcset( $id, 'large' );
+		return is_string( $srcset ) ? $srcset : '';
+	}
+	if ( '' !== mod_string( 'reboot_child_hero_image' ) ) {
+		return '';
+	}
+
+	$large = bundled_portrait_url( PORTRAIT_LARGE );
+	$small = bundled_portrait_url( PORTRAIT_SMALL );
+	if ( '' === $large || '' === $small ) {
+		return '';
+	}
+
+	return $small . ' 480w, ' . $large . ' 960w';
+}
+
+/**
+ * Alt text for the portrait.
+ */
+function portrait_alt(): string {
+	return sprintf(
+		/* translators: %s: person name. */
+		__( 'Фото: %s', 'reboot-child' ),
+		person_name()
+	);
+}
+
+/**
+ * Portrait markup. A customizer photo wins; otherwise the bundled portrait.
+ *
+ * The returned markup is escaped.
+ *
+ * @param array{class?: string, loading?: string, fetchpriority?: string, sizes?: string} $args Display options.
+ */
+function portrait_html( array $args = array() ): string {
+	$class    = isset( $args['class'] ) && is_string( $args['class'] ) ? $args['class'] : 'resume-portrait';
+	$loading  = isset( $args['loading'] ) && 'lazy' === $args['loading'] ? 'lazy' : 'eager';
+	$priority = isset( $args['fetchpriority'] ) && 'high' === $args['fetchpriority'] ? 'high' : '';
+	$sizes    = isset( $args['sizes'] ) && is_string( $args['sizes'] ) && '' !== $args['sizes'] ? $args['sizes'] : hero_slot_sizes();
+	$alt      = portrait_alt();
+	$id       = hero_image_id();
+
+	if ( $id > 0 ) {
+		$attr = array(
+			'class'    => $class,
+			'alt'      => $alt,
+			'decoding' => 'async',
+			'loading'  => $loading,
+			'sizes'    => $sizes,
+		);
+		if ( 'high' === $priority ) {
+			$attr['fetchpriority'] = 'high';
+		}
+		$html = wp_get_attachment_image( $id, 'large', false, $attr );
+		return is_string( $html ) ? $html : '';
+	}
+
+	$src = hero_image_src();
+	if ( '' === $src ) {
+		return '';
+	}
+
+	$attr = array(
+		'class'    => $class,
+		'src'      => $src,
+		'alt'      => $alt,
+		'decoding' => 'async',
+		'loading'  => $loading,
+		'sizes'    => $sizes,
+	);
+	if ( 'high' === $priority ) {
+		$attr['fetchpriority'] = 'high';
+	}
+	if ( '' === mod_string( 'reboot_child_hero_image' ) ) {
+		$srcset = hero_image_srcset();
+		if ( '' !== $srcset ) {
+			$attr['srcset'] = $srcset;
+		}
+		$attr['width']  = (string) PORTRAIT_WIDTH;
+		$attr['height'] = (string) PORTRAIT_HEIGHT;
+	}
+
+	$html = '<img';
+	foreach ( $attr as $name => $value ) {
+		$safe  = 'src' === $name ? esc_url( $value ) : esc_attr( $value );
+		$html .= ' ' . $name . '="' . $safe . '"';
+	}
+
+	return $html . ' />';
 }
 
 /**
