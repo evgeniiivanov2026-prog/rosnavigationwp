@@ -1,0 +1,391 @@
+/**
+ * Resume landing, resume page, blog cards and related posts.
+ * Scoped to .resume so the parent chrome keeps its own rules.
+ */
+
+.sidebar-none .site-main.resume {
+	width: min(100%, 72rem);
+	margin-inline: auto;
+}
+
+.resume {
+	--resume-ink: #142033;
+	--resume-muted: #4d5d73;
+	--resume-accent: #0f766e;
+	--resume-accent-ink: #ffffff;
+	--resume-line: #d5e0e8;
+	--resume-card: #ffffff;
+	--resume-soft: #f3f7f8;
+	--resume-radius: 14px;
+	--resume-shadow: 0 12px 32px rgba(20, 32, 51, 0.06);
+	--resume-space: 1.5rem;
+	color: var(--resume-ink);
+	font-size: 1.0625rem;
+	line-height: 1.6;
+}
+
+.resume a {
+	color: var(--resume-accent);
+}
+
+.resume-prose {
+	max-width: 65ch;
+}
+
+.resume-prose p:last-child {
+	margin-bottom: 0;
+}
+
+.resume-hero,
+.resume-section,
+.resume-contact,
+.resume-cta,
+.resume-facts {
+	margin: 0 0 2.5rem;
+}
+
+.resume-hero {
+	display: grid;
+	gap: 1.5rem;
+	align-items: center;
+	padding: 1.5rem;
+	background: var(--resume-soft);
+	border-radius: var(--resume-radius);
+}
+
+.resume-hero__eyebrow,
+.resume-card__date,
+.resume-job__meta,
+.resume-project__meta,
+.resume-fact__label {
+	color: var(--resume-muted);
+	font-size: 0.92rem;
+}
+
+.resume-hero__eyebrow,
+.resume-hero__title,
+.resume-hero__text,
+.resume-section__title,
+.resume-page-head__title,
+.resume-card__title,
+.resume-job__title,
+.resume-project__title {
+	margin: 0 0 0.6rem;
+}
+
+.resume-hero__title,
+.resume-page-head__title {
+	font-size: clamp(2rem, 4vw, 3.25rem);
+	line-height: 1.15;
+	max-width: 18ch;
+}
+
+.resume-hero__text {
+	max-width: 42ch;
+	font-size: 1.125rem;
+}
+
+.resume-hero__actions,
+.resume-cta,
+.resume-section__head {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	align-items: center;
+}
+
+.resume-hero__photo,
+.resume-card__image,
+.resume-job__logo {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+.resume-hero__photo {
+	width: 100%;
+	border-radius: var(--resume-radius);
+}
+
+.resume-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 44px;
+	padding: 0.55rem 1.15rem;
+	border-radius: 999px;
+	background: var(--resume-accent);
+	color: var(--resume-accent-ink);
+	text-decoration: none;
+	font-weight: 700;
+}
+
+.resume a.resume-button--ghost {
+	background: transparent;
+	color: var(--resume-accent);
+	box-shadow: inset 0 0 0 1px var(--resume-accent);
+}
+
+.resume-facts {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0.75rem;
+}
+
+.resume-fact,
+.resume-card,
+.resume-project,
+.resume-education,
+.resume-skill-group {
+	background: var(--resume-card);
+	border: 1px solid var(--resume-line);
+	border-radius: var(--resume-radius);
+	box-shadow: var(--resume-shadow);
+}
+
+.resume-fact {
+	padding: 1rem 1.1rem;
+}
+
+.resume-fact__value {
+	margin: 0;
+	font-size: 1.7rem;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.resume-fact__label {
+	margin: 0.25rem 0 0;
+}
+
+.resume-section__head {
+	justify-content: space-between;
+	margin-bottom: 1rem;
+}
+
+.resume-section__title {
+	font-size: clamp(1.5rem, 2vw, 2rem);
+	line-height: 1.2;
+}
+
+.resume-section__more {
+	font-weight: 700;
+}
+
+.resume-cards,
+.resume-projects,
+.resume-skills {
+	display: grid;
+	gap: 1rem;
+}
+
+.resume-card {
+	overflow: hidden;
+}
+
+.resume-card__body,
+.resume-project,
+.resume-education,
+.resume-skill-group {
+	padding: 1rem 1.1rem;
+}
+
+.resume-card__title a {
+	text-decoration: none;
+}
+
+.resume-card__excerpt,
+.resume-project__result {
+	margin: 0.4rem 0 0;
+}
+
+.resume-project__result {
+	font-weight: 700;
+}
+
+.resume-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	margin: 0.8rem 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.resume-tags li,
+.resume-tags a {
+	display: inline-block;
+	padding: 0.15rem 0.55rem;
+	border-radius: 999px;
+	background: var(--resume-soft);
+	color: var(--resume-ink);
+	text-decoration: none;
+	font-size: 0.85rem;
+}
+
+.resume-contact {
+	display: grid;
+	gap: 1rem;
+	padding: 1.25rem;
+	border-radius: var(--resume-radius);
+	background: var(--resume-ink);
+	color: #f4f7fb;
+}
+
+.resume-contact .resume-section__title,
+.resume-contact a {
+	color: #f4f7fb;
+}
+
+.resume-contact .resume-button {
+	background: #f4f7fb;
+	color: var(--resume-ink);
+}
+
+.resume-contact__list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.resume-crumbs ol {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem 0.7rem;
+	margin: 0 0 1rem;
+	padding: 0;
+	list-style: none;
+	color: var(--resume-muted);
+	font-size: 0.92rem;
+}
+
+.resume-timeline {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.resume-job {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 0.9rem;
+	padding: 0 0 1.25rem 1rem;
+	border-left: 2px solid var(--resume-line);
+}
+
+.resume-job:has(.resume-job__logo) {
+	grid-template-columns: auto minmax(0, 1fr);
+}
+
+.resume-job__logo {
+	width: 48px;
+	height: auto;
+	border-radius: 8px;
+}
+
+.resume-job__company,
+.resume-job__role,
+.resume-job__meta {
+	margin: 0 0 0.25rem;
+}
+
+.resume-empty {
+	margin: 0;
+	color: var(--resume-muted);
+}
+
+.resume-related {
+	flex: 1 1 100%;
+	width: 100%;
+	margin-top: 2rem;
+}
+
+.resume a:focus-visible,
+.resume button:focus-visible {
+	outline: 2px solid var(--resume-accent);
+	outline-offset: 3px;
+}
+
+@media (min-width: 700px) {
+	.resume-hero {
+		grid-template-columns: minmax(0, 1.4fr) minmax(12rem, 0.8fr);
+		padding: 2rem;
+	}
+
+	.resume-facts {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.resume-cards,
+	.resume-projects {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.resume-contact {
+		grid-template-columns: minmax(0, 1.4fr) minmax(12rem, 0.8fr);
+		align-items: center;
+	}
+}
+
+@media (min-width: 1100px) {
+	.resume-cards {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	body.wp-child-theme-reboot_child {
+		background: #101820;
+		color: #e7eef5;
+	}
+
+	body.wp-child-theme-reboot_child .site-header,
+	body.wp-child-theme-reboot_child .site-footer,
+	body.wp-child-theme-reboot_child .site-content,
+	body.wp-child-theme-reboot_child .widget,
+	body.wp-child-theme-reboot_child .main-navigation {
+		background: #101820;
+		color: #e7eef5;
+	}
+
+	body.wp-child-theme-reboot_child .site-title,
+	body.wp-child-theme-reboot_child .site-title a,
+	body.wp-child-theme-reboot_child .entry-title,
+	body.wp-child-theme-reboot_child .entry-content,
+	body.wp-child-theme-reboot_child a {
+		color: #e7eef5;
+	}
+
+	body.wp-child-theme-reboot_child a:hover,
+	body.wp-child-theme-reboot_child a:focus-visible {
+		color: #8ed9d0;
+	}
+
+	body.wp-child-theme-reboot_child .resume a:not(.resume-button) {
+		color: #8ed9d0;
+	}
+
+	.resume {
+		--resume-ink: #e7eef5;
+		--resume-muted: #b7c6d4;
+		--resume-accent: #2f9e8f;
+		--resume-accent-ink: #06211e;
+		--resume-line: #2a3b4a;
+		--resume-card: #172433;
+		--resume-soft: #1c2c3c;
+		--resume-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+	}
+
+	.resume-contact {
+		background: #0b151d;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.resume *,
+	.resume *::before,
+	.resume *::after {
+		scroll-behavior: auto;
+		transition: none;
+	}
+}
