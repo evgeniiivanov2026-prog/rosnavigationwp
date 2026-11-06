@@ -396,10 +396,14 @@ body.wp-child-theme-reboot_child a.resume-button {
 	color: var(--resume-accent-ink);
 }
 
-.resume a.resume-button--ghost {
-	background: transparent;
-	color: var(--resume-accent);
-	box-shadow: inset 0 0 0 1px var(--resume-accent);
+body.wp-child-theme-reboot_child .resume a.resume-button--ghost,
+body.wp-child-theme-reboot_child .resume a.resume-button--ghost:visited,
+body.wp-child-theme-reboot_child .resume a.resume-button--ghost:hover,
+body.wp-child-theme-reboot_child .resume a.resume-button--ghost:focus-visible,
+body.wp-child-theme-reboot_child .resume a.resume-button--ghost:active {
+	background: #ffffff;
+	color: #142033;
+	box-shadow: inset 0 0 0 1.5px #142033;
 }
 
 .resume-facts {
@@ -507,20 +511,33 @@ body.wp-child-theme-reboot_child a.resume-button {
 .resume-contact {
 	display: grid;
 	gap: 1rem;
-	padding: 1.25rem;
+	padding: 1.35rem 1.4rem;
 	border-radius: var(--resume-radius);
-	background: var(--rc-band);
-	color: var(--rc-band-ink);
+	background: #142033;
+	color: #f7fbff;
+	opacity: 1;
 }
 
-.resume-contact .resume-section__title,
-.resume-contact a {
-	color: var(--rc-band-ink);
+body.wp-child-theme-reboot_child .resume-contact .resume-section__title,
+body.wp-child-theme-reboot_child .resume-contact .resume-prose {
+	color: #f7fbff;
 }
 
-.resume-contact .resume-button {
-	background: var(--rc-band-ink);
-	color: var(--rc-band);
+body.wp-child-theme-reboot_child .resume-contact a:not(.resume-button),
+body.wp-child-theme-reboot_child .resume-contact a:not(.resume-button):visited,
+body.wp-child-theme-reboot_child .resume-contact a:not(.resume-button):hover,
+body.wp-child-theme-reboot_child .resume-contact a:not(.resume-button):focus-visible {
+	color: #f7fbff;
+}
+
+body.wp-child-theme-reboot_child .resume-contact a.resume-button,
+body.wp-child-theme-reboot_child .resume-contact a.resume-button:visited,
+body.wp-child-theme-reboot_child .resume-contact a.resume-button:hover,
+body.wp-child-theme-reboot_child .resume-contact a.resume-button:focus-visible,
+body.wp-child-theme-reboot_child .resume-contact a.resume-button:active {
+	background: #f4f7fb;
+	color: #142033;
+	box-shadow: none;
 }
 
 .resume-contact__list {
@@ -679,8 +696,42 @@ body.wp-child-theme-reboot_child a.resume-button {
 		color: #8ed9d0;
 	}
 
-	body.wp-child-theme-reboot_child .resume-contact a:not(.resume-button) {
-		color: var(--rc-band-ink);
+	body.wp-child-theme-reboot_child .resume-contact,
+	body.wp-child-theme-reboot_child .resume-contact .resume-section__title,
+	body.wp-child-theme-reboot_child .resume-contact .resume-prose,
+	body.wp-child-theme-reboot_child .resume-contact a:not(.resume-button),
+	body.wp-child-theme-reboot_child .resume-contact a:not(.resume-button):visited,
+	body.wp-child-theme-reboot_child .resume-contact a:not(.resume-button):hover,
+	body.wp-child-theme-reboot_child .resume-contact a:not(.resume-button):focus-visible {
+		color: #f7fbff;
+	}
+
+	body.wp-child-theme-reboot_child .resume-contact {
+		background: #0e1a28;
+	}
+
+	body.wp-child-theme-reboot_child .resume a.resume-button:not(.resume-button--ghost),
+	body.wp-child-theme-reboot_child .resume a.resume-button:not(.resume-button--ghost):visited,
+	body.wp-child-theme-reboot_child .resume a.resume-button:not(.resume-button--ghost):hover,
+	body.wp-child-theme-reboot_child .resume a.resume-button:not(.resume-button--ghost):focus-visible,
+	body.wp-child-theme-reboot_child .resume a.resume-button:not(.resume-button--ghost):active {
+		background: var(--resume-accent);
+		color: var(--resume-accent-ink);
+	}
+
+	body.wp-child-theme-reboot_child .resume a.resume-button--ghost,
+	body.wp-child-theme-reboot_child .resume a.resume-button--ghost:visited,
+	body.wp-child-theme-reboot_child .resume a.resume-button--ghost:hover,
+	body.wp-child-theme-reboot_child .resume a.resume-button--ghost:focus-visible,
+	body.wp-child-theme-reboot_child .resume a.resume-button--ghost:active,
+	body.wp-child-theme-reboot_child .resume .resume-contact a.resume-button,
+	body.wp-child-theme-reboot_child .resume .resume-contact a.resume-button:visited,
+	body.wp-child-theme-reboot_child .resume .resume-contact a.resume-button:hover,
+	body.wp-child-theme-reboot_child .resume .resume-contact a.resume-button:focus-visible,
+	body.wp-child-theme-reboot_child .resume .resume-contact a.resume-button:active {
+		background: #f4f7fb;
+		color: #142033;
+		box-shadow: none;
 	}
 
 	body.wp-child-theme-reboot_child .search-screen {
@@ -851,10 +902,15 @@ body.wp-child-theme-reboot_child a.resume-button {
 		}
 
 		.resume-job,
-		.resume-summary,
+		.resume-summary {
+			animation-name: resume-rise;
+		}
+
 		.resume-contact,
 		.resume-cta {
-			animation-name: resume-rise;
+			animation-name: none;
+			opacity: 1;
+			translate: none;
 		}
 	}
 
