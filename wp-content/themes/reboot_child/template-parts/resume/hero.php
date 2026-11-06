@@ -12,8 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 $reboot_child_name     = RebootChild\person_name();
 $reboot_child_eyebrow  = RebootChild\mod_text( 'reboot_child_hero_eyebrow' );
 $reboot_child_text     = RebootChild\mod_text( 'reboot_child_hero_text' );
-$reboot_child_image    = RebootChild\hero_image_id();
-$reboot_child_src      = RebootChild\hero_image_src();
+$reboot_child_portrait = RebootChild\portrait_html(
+	array(
+		'class'         => 'resume-hero__photo',
+		'sizes'         => RebootChild\hero_slot_sizes(),
+		'fetchpriority' => 'high',
+		'loading'       => 'eager',
+	)
+);
 $reboot_child_primary = array(
 	'label' => RebootChild\mod_text( 'reboot_child_hero_primary_label' ),
 	'url'   => RebootChild\button_url( 'reboot_child_hero_primary_url', 'resume' ),
@@ -43,31 +49,9 @@ $reboot_child_secondary = array(
 			</div>
 		<?php endif; ?>
 	</div>
-	<?php if ( $reboot_child_image > 0 || '' !== $reboot_child_src ) : ?>
+	<?php if ( '' !== $reboot_child_portrait ) : ?>
 		<div class="resume-hero__media">
-			<?php
-			$reboot_child_alt = sprintf(
-				/* translators: %s: person name. */
-				__( 'Фото: %s', 'reboot-child' ),
-				$reboot_child_name
-			);
-			if ( $reboot_child_image > 0 ) {
-				echo wp_get_attachment_image(
-					$reboot_child_image,
-					'large',
-					false,
-					array(
-						'class'         => 'resume-hero__photo',
-						'alt'           => $reboot_child_alt,
-						'fetchpriority' => 'high',
-						'decoding'      => 'async',
-						'loading'       => 'eager',
-					)
-				);
-			} else {
-				echo '<img class="resume-hero__photo" src="' . esc_url( $reboot_child_src ) . '" alt="' . esc_attr( $reboot_child_alt ) . '" decoding="async" fetchpriority="high" />';
-			}
-			?>
+			<?php echo $reboot_child_portrait; // Escaped in portrait_html(). ?>
 		</div>
 	<?php endif; ?>
 </section>

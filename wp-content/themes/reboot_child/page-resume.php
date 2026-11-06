@@ -15,6 +15,15 @@ get_header();
 	<main id="main" class="site-main resume">
 		<?php get_template_part( 'template-parts/resume/breadcrumbs' ); ?>
 		<header class="resume-page-head">
+			<?php
+			echo RebootChild\portrait_html(
+				array(
+					'class'   => 'resume-page-head__photo',
+					'sizes'   => '6.5rem',
+					'loading' => 'eager',
+				)
+			); // Escaped in portrait_html().
+			?>
 			<h1 class="resume-page-head__title"><?php echo esc_html( get_the_title( get_queried_object_id() ) ); ?></h1>
 		</header>
 		<?php get_template_part( 'template-parts/resume/summary' ); ?>
