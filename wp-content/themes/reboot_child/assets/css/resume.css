@@ -1,24 +1,228 @@
 /**
- * Resume landing, resume page, blog cards and related posts.
- * Scoped to .resume so the parent chrome keeps its own rules.
+ * Visual system for the child theme.
+ *
+ * Tokens live on the body so the parent header, menu, footer and the resume
+ * blocks share one palette. Parent containers stay full-bleed; from 1400px
+ * the shared inner column is 80rem so a 2560px screen keeps a centered measure
+ * instead of the parent 1190px cap. Below that, Reboot's own .fixed widths apply.
  */
 
-.sidebar-none .site-main.resume {
-	width: min(100%, 72rem);
+body.wp-child-theme-reboot_child {
+	--rc-ink: #142033;
+	--rc-muted: #4d5d73;
+	--rc-accent: #0f766e;
+	--rc-accent-ink: #ffffff;
+	--rc-line: #d5e0e8;
+	--rc-canvas: #f4f7f8;
+	--rc-surface: #ffffff;
+	--rc-header: #0e1c2f;
+	--rc-header-ink: #f4f7fb;
+	--rc-band: #142033;
+	--rc-band-ink: #f4f7fb;
+	--rc-radius: 14px;
+	--rc-shadow: 0 12px 32px rgba(20, 32, 51, 0.06);
+	--rc-space: 0.5rem;
+	background: var(--rc-canvas);
+	color: var(--rc-ink);
+}
+
+body.wp-child-theme-reboot_child a {
+	color: var(--rc-accent);
+}
+
+body.wp-child-theme-reboot_child a:hover,
+body.wp-child-theme-reboot_child a:focus-visible {
+	color: #0b534c;
+}
+
+body.wp-child-theme-reboot_child :focus-visible {
+	outline: 2px solid var(--rc-accent);
+	outline-offset: 3px;
+}
+
+body.wp-child-theme-reboot_child .main-navigation.fixed,
+body.wp-child-theme-reboot_child .footer-navigation.fixed {
+	width: 100%;
+	max-width: none;
+}
+
+body.wp-child-theme-reboot_child .main-navigation-inner,
+body.wp-child-theme-reboot_child .footer-navigation .main-navigation-inner {
+	width: 100%;
 	margin-inline: auto;
 }
 
+@media (min-width: 768px) {
+	body.wp-child-theme-reboot_child .main-navigation-inner,
+	body.wp-child-theme-reboot_child .footer-navigation .main-navigation-inner {
+		max-width: 720px;
+	}
+}
+
+@media (min-width: 992px) {
+	body.wp-child-theme-reboot_child .main-navigation-inner,
+	body.wp-child-theme-reboot_child .footer-navigation .main-navigation-inner {
+		max-width: 960px;
+	}
+}
+
+@media (min-width: 1200px) {
+	body.wp-child-theme-reboot_child .main-navigation-inner,
+	body.wp-child-theme-reboot_child .footer-navigation .main-navigation-inner {
+		max-width: 1190px;
+	}
+}
+
+@media (min-width: 1400px) {
+	body.wp-child-theme-reboot_child .fixed.site-header-inner,
+	body.wp-child-theme-reboot_child .fixed.site-content,
+	body.wp-child-theme-reboot_child .fixed.site-footer-inner,
+	body.wp-child-theme-reboot_child .main-navigation-inner,
+	body.wp-child-theme-reboot_child .footer-navigation .main-navigation-inner {
+		max-width: 80rem;
+	}
+}
+
+body.wp-child-theme-reboot_child .site-header {
+	margin-bottom: 0;
+	padding-top: 1.25rem;
+	padding-bottom: 1.25rem;
+	background: var(--rc-header);
+	color: var(--rc-header-ink);
+	box-shadow: none;
+}
+
+body.wp-child-theme-reboot_child .site-header + .main-navigation,
+body.wp-child-theme-reboot_child .main-navigation {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+body.wp-child-theme-reboot_child .site-title,
+body.wp-child-theme-reboot_child .site-title a,
+body.wp-child-theme-reboot_child .site-description,
+body.wp-child-theme-reboot_child .site-header .search-icon,
+body.wp-child-theme-reboot_child .site-header .search-icon:hover {
+	color: var(--rc-header-ink);
+}
+
+body.wp-child-theme-reboot_child .site-description {
+	color: #c5d2df;
+}
+
+body.wp-child-theme-reboot_child .humburger span {
+	background: var(--rc-header-ink);
+}
+
+body.wp-child-theme-reboot_child .main-navigation,
+body.wp-child-theme-reboot_child .footer-navigation {
+	background: var(--rc-header);
+}
+
+body.wp-child-theme-reboot_child .footer-navigation ul li > a,
+body.wp-child-theme-reboot_child .footer-navigation ul li > span,
+body.wp-child-theme-reboot_child .main-navigation ul li > a,
+body.wp-child-theme-reboot_child .main-navigation ul li > span {
+	padding: 0.8rem 1rem;
+	color: var(--rc-header-ink);
+}
+
+body.wp-child-theme-reboot_child .footer-navigation ul li > a:before,
+body.wp-child-theme-reboot_child .main-navigation ul li > a:before {
+	background: rgba(255, 255, 255, 0.08);
+}
+
+body.wp-child-theme-reboot_child .footer-navigation .current-menu-item > a,
+body.wp-child-theme-reboot_child .main-navigation .current-menu-item > a {
+	color: #8ed9d0;
+}
+
+body.wp-child-theme-reboot_child .footer-navigation ul li .sub-menu,
+body.wp-child-theme-reboot_child .main-navigation ul li .sub-menu {
+	background: #16304a;
+}
+
+body.wp-child-theme-reboot_child .site-content {
+	padding-top: 2rem;
+	background: transparent;
+}
+
+body.wp-child-theme-reboot_child .site-footer,
+body.wp-child-theme-reboot_child .site-footer--style-gray {
+	background: var(--rc-header);
+	color: var(--rc-header-ink);
+}
+
+body.wp-child-theme-reboot_child .widget-area .widget {
+	margin-bottom: 1.5rem;
+	padding: 1rem 1.1rem;
+	background: var(--rc-surface);
+	border: 1px solid var(--rc-line);
+	border-radius: var(--rc-radius);
+	box-shadow: var(--rc-shadow);
+}
+
+body.wp-child-theme-reboot_child .breadcrumb,
+body.wp-child-theme-reboot_child .breadcrumb a,
+body.wp-child-theme-reboot_child .breadcrumb span {
+	color: var(--rc-accent);
+}
+
+body.wp-child-theme-reboot_child .entry-content,
+body.wp-child-theme-reboot_child .page-content {
+	max-width: 65ch;
+}
+
+body.wp-child-theme-reboot_child .contact-form input[type="text"],
+body.wp-child-theme-reboot_child .contact-form input[type="email"],
+body.wp-child-theme-reboot_child .contact-form textarea,
+body.wp-child-theme-reboot_child .search-field,
+body.wp-child-theme-reboot_child .wp-block-search__input,
+body.wp-child-theme-reboot_child .search-screen .search-field {
+	min-height: 44px;
+	border-radius: 10px;
+	border-color: var(--rc-line);
+	background: var(--rc-surface);
+	color: var(--rc-ink);
+}
+
+body.wp-child-theme-reboot_child .contact-form .btn {
+	min-height: 44px;
+	padding: 0.55rem 1.15rem;
+	border-radius: 999px;
+	background: var(--rc-accent);
+	border-color: var(--rc-accent);
+	color: var(--rc-accent-ink);
+	font-weight: 700;
+}
+
+body.wp-child-theme-reboot_child .pagination .nav-links .page-numbers {
+	color: var(--rc-ink);
+}
+
+body.wp-child-theme-reboot_child .pagination .nav-links .page-numbers.current {
+	color: var(--rc-accent);
+	box-shadow: inset 0 0 0 1px var(--rc-line);
+}
+
+body.wp-child-theme-reboot_child .scrolltop {
+	background: var(--rc-surface);
+}
+
+body.wp-child-theme-reboot_child .scrolltop:before {
+	color: var(--rc-accent);
+}
+
 .resume {
-	--resume-ink: #142033;
-	--resume-muted: #4d5d73;
-	--resume-accent: #0f766e;
-	--resume-accent-ink: #ffffff;
-	--resume-line: #d5e0e8;
-	--resume-card: #ffffff;
+	--resume-ink: var(--rc-ink);
+	--resume-muted: var(--rc-muted);
+	--resume-accent: var(--rc-accent);
+	--resume-accent-ink: var(--rc-accent-ink);
+	--resume-line: var(--rc-line);
+	--resume-card: var(--rc-surface);
 	--resume-soft: #f3f7f8;
-	--resume-radius: 14px;
-	--resume-shadow: 0 12px 32px rgba(20, 32, 51, 0.06);
-	--resume-space: 1.5rem;
+	--resume-radius: var(--rc-radius);
+	--resume-shadow: var(--rc-shadow);
 	color: var(--resume-ink);
 	font-size: 1.0625rem;
 	line-height: 1.6;
@@ -41,14 +245,14 @@
 .resume-contact,
 .resume-cta,
 .resume-facts {
-	margin: 0 0 2.5rem;
+	margin: 0 0 2rem;
 }
 
 .resume-hero {
 	display: grid;
 	gap: 1.5rem;
 	align-items: center;
-	padding: 1.5rem;
+	padding: 1rem;
 	background: var(--resume-soft);
 	border-radius: var(--resume-radius);
 }
@@ -70,7 +274,7 @@
 .resume-card__title,
 .resume-job__title,
 .resume-project__title {
-	margin: 0 0 0.6rem;
+	margin: 0 0 0.5rem;
 }
 
 .resume-hero__title,
@@ -78,6 +282,7 @@
 	font-size: clamp(2rem, 4vw, 3.25rem);
 	line-height: 1.15;
 	max-width: 18ch;
+	overflow-wrap: anywhere;
 }
 
 .resume-hero__text {
@@ -112,6 +317,7 @@
 	align-items: center;
 	justify-content: center;
 	min-height: 44px;
+	max-width: 100%;
 	padding: 0.55rem 1.15rem;
 	border-radius: 999px;
 	background: var(--resume-accent);
@@ -228,18 +434,18 @@
 	gap: 1rem;
 	padding: 1.25rem;
 	border-radius: var(--resume-radius);
-	background: var(--resume-ink);
-	color: #f4f7fb;
+	background: var(--rc-band);
+	color: var(--rc-band-ink);
 }
 
 .resume-contact .resume-section__title,
 .resume-contact a {
-	color: #f4f7fb;
+	color: var(--rc-band-ink);
 }
 
 .resume-contact .resume-button {
-	background: #f4f7fb;
-	color: var(--resume-ink);
+	background: var(--rc-band-ink);
+	color: var(--rc-band);
 }
 
 .resume-contact__list {
@@ -300,13 +506,27 @@
 	margin-top: 2rem;
 }
 
-.resume a:focus-visible,
-.resume button:focus-visible {
-	outline: 2px solid var(--resume-accent);
-	outline-offset: 3px;
+@media (max-width: 479px) {
+	.resume-hero__actions,
+	.resume-cta {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.resume-button {
+		width: 100%;
+	}
 }
 
 @media (min-width: 700px) {
+	.resume-hero,
+	.resume-section,
+	.resume-contact,
+	.resume-cta,
+	.resume-facts {
+		margin-bottom: 2.5rem;
+	}
+
 	.resume-hero {
 		grid-template-columns: minmax(0, 1.4fr) minmax(12rem, 0.8fr);
 		padding: 2rem;
@@ -335,25 +555,18 @@
 
 @media (prefers-color-scheme: dark) {
 	body.wp-child-theme-reboot_child {
-		background: #101820;
-		color: #e7eef5;
-	}
-
-	body.wp-child-theme-reboot_child .site-header,
-	body.wp-child-theme-reboot_child .site-footer,
-	body.wp-child-theme-reboot_child .site-content,
-	body.wp-child-theme-reboot_child .widget,
-	body.wp-child-theme-reboot_child .main-navigation {
-		background: #101820;
-		color: #e7eef5;
-	}
-
-	body.wp-child-theme-reboot_child .site-title,
-	body.wp-child-theme-reboot_child .site-title a,
-	body.wp-child-theme-reboot_child .entry-title,
-	body.wp-child-theme-reboot_child .entry-content,
-	body.wp-child-theme-reboot_child a {
-		color: #e7eef5;
+		--rc-ink: #e7eef5;
+		--rc-muted: #b7c6d4;
+		--rc-accent: #2f9e8f;
+		--rc-accent-ink: #06211e;
+		--rc-line: #2a3b4a;
+		--rc-canvas: #101820;
+		--rc-surface: #172433;
+		--rc-header: #0b1520;
+		--rc-header-ink: #f4f7fb;
+		--rc-band: #0b151d;
+		--rc-band-ink: #f4f7fb;
+		--rc-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
 	}
 
 	body.wp-child-theme-reboot_child a:hover,
@@ -361,31 +574,41 @@
 		color: #8ed9d0;
 	}
 
+	body.wp-child-theme-reboot_child .resume {
+		--resume-soft: #1c2c3c;
+	}
+
 	body.wp-child-theme-reboot_child .resume a:not(.resume-button) {
 		color: #8ed9d0;
 	}
 
-	.resume {
-		--resume-ink: #e7eef5;
-		--resume-muted: #b7c6d4;
-		--resume-accent: #2f9e8f;
-		--resume-accent-ink: #06211e;
-		--resume-line: #2a3b4a;
-		--resume-card: #172433;
-		--resume-soft: #1c2c3c;
-		--resume-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+	body.wp-child-theme-reboot_child .resume-contact a:not(.resume-button) {
+		color: var(--rc-band-ink);
 	}
 
-	.resume-contact {
-		background: #0b151d;
+	body.wp-child-theme-reboot_child .search-screen {
+		background: var(--rc-surface);
+		color: var(--rc-ink);
+	}
+
+	body.wp-child-theme-reboot_child .comment-list .comment-author {
+		color: var(--rc-ink);
 	}
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.resume *,
-	.resume *::before,
-	.resume *::after {
+	body.wp-child-theme-reboot_child *,
+	body.wp-child-theme-reboot_child *::before,
+	body.wp-child-theme-reboot_child *::after {
 		scroll-behavior: auto;
-		transition: none;
+		transition-duration: 0.01ms;
+		animation-duration: 0.01ms;
+	}
+
+	body.wp-child-theme-reboot_child .btn:hover,
+	body.wp-child-theme-reboot_child .comment-respond .form-submit input:hover,
+	body.wp-child-theme-reboot_child .search-screen,
+	body.wp-child-theme-reboot_child .search-screen.open {
+		transform: none;
 	}
 }
