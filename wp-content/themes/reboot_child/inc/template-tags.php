@@ -17,6 +17,18 @@ add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_resume_style', 110 
 add_filter( 'body_class', __NAMESPACE__ . '\\layout_body_class', 20 );
 add_action( 'wp_head', __NAMESPACE__ . '\\preload_hero', 2 );
 add_action( 'wp_head', __NAMESPACE__ . '\\print_person_schema', 20 );
+add_action( 'wp_footer', __NAMESPACE__ . '\\print_reading_progress', 5 );
+
+/**
+ * Thin reading mark. Scroll position drives it in browsers that support a scroll timeline.
+ */
+function print_reading_progress(): void {
+	if ( is_admin() || ( ! is_singular() && ! is_home() ) ) {
+		return;
+	}
+
+	echo '<div class="resume-progress" aria-hidden="true"></div>' . "\n";
+}
 
 /**
  * Component stylesheet. It loads after the parent and the child header sheet.
