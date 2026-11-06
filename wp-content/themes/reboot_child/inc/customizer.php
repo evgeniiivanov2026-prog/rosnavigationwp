@@ -28,7 +28,7 @@ function register_customizer( \WP_Customize_Manager $wp_customize ): void {
 		'reboot_child_panel',
 		array(
 			'title'       => __( 'Сайт-резюме', 'reboot-child' ),
-			'description' => __( 'Тексты главной, фактов и контактов. Шаблоны подключаются отдельно: до этого смена значений на сайте не видна.', 'reboot-child' ),
+			'description' => __( 'Тексты главной, резюме и контактов. Шаблоны подключаются отдельно: до этого смена значений на сайте не видна.', 'reboot-child' ),
 			'priority'    => 160,
 		)
 	);
@@ -95,6 +95,16 @@ function customizer_sections(): array {
 				'reboot_child_posts_title'    => field( __( 'Заголовок блока статей', 'reboot-child' ) ),
 				'reboot_child_posts_count'    => field( __( 'Сколько статей показывать', 'reboot-child' ), 'number', '3' ),
 				'reboot_child_projects_title' => field( __( 'Заголовок блока проектов', 'reboot-child' ) ),
+			),
+		),
+		'reboot_child_resume'  => array(
+			'title'  => __( 'Резюме', 'reboot-child' ),
+			'fields' => array(
+				'reboot_child_summary'      => field( __( 'Кратко о себе', 'reboot-child' ), 'textarea' ),
+				'reboot_child_edu_place'    => field( __( 'Учебное заведение', 'reboot-child' ) ),
+				'reboot_child_edu_program'  => field( __( 'Программа', 'reboot-child' ) ),
+				'reboot_child_edu_period'   => field( __( 'Период обучения', 'reboot-child' ) ),
+				'reboot_child_edu_note'     => field( __( 'Примечание к образованию', 'reboot-child' ), 'textarea' ),
 			),
 		),
 		'reboot_child_contact' => array(

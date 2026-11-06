@@ -68,6 +68,8 @@ function reboot_child_load_includes() {
 		'/inc/helpers.php',
 		'/inc/customizer.php',
 		'/inc/cpt.php',
+		'/inc/meta-boxes.php',
+		'/inc/pages.php',
 	);
 
 	foreach ( $includes as $include ) {

@@ -1,0 +1,49 @@
+/**
+ * Admin fields for experience and project entries.
+ */
+
+.reboot-child-field {
+	margin: 0 0 12px;
+}
+
+.reboot-child-field label {
+	display: block;
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+
+.reboot-child-field input[type="text"],
+.reboot-child-field input[type="url"],
+.reboot-child-field input[type="month"],
+.reboot-child-field input[type="number"],
+.reboot-child-field textarea {
+	width: 100%;
+	max-width: 40rem;
+}
+
+.reboot-child-field .description {
+	display: block;
+	margin-top: 4px;
+}
+
+.reboot-child-media-preview {
+	display: block;
+	margin: 8px 0;
+}
+
+.reboot-child-media-preview__image {
+	display: block;
+	width: 120px;
+	height: auto;
+}
+
+.reboot-child-media-actions {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+}
+
+.reboot-child-media-actions button:focus-visible {
+	outline: 2px solid #2271b1;
+	outline-offset: 2px;
+}

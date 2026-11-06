@@ -2,10 +2,6 @@
 /**
  * Content model for the resume.
  *
- * Registration is intentionally not attached to init.
- * Turn it on in the next phase, after the model is confirmed:
- * add_action( 'init', __NAMESPACE__ . '\\register_content_types' );
- *
  * @package RebootChild
  */
 
@@ -35,6 +31,7 @@ final class Content_Model {
 	public const CLIENT  = '_reboot_child_client';
 	public const YEAR    = '_reboot_child_year';
 	public const STACK   = '_reboot_child_stack';
+	public const SUMMARY = '_reboot_child_summary';
 	public const RESULT  = '_reboot_child_result';
 	public const URL     = '_reboot_child_url';
 }
@@ -90,7 +87,7 @@ function register_content_types(): void {
 			'query_var'           => false,
 			'menu_icon'           => 'dashicons-portfolio',
 			'menu_position'       => 22,
-			'supports'            => array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions' ),
+			'supports'            => array( 'title', 'editor', 'thumbnail', 'page-attributes', 'revisions' ),
 			'capability_type'     => 'post',
 			'map_meta_cap'        => true,
 		)
@@ -161,3 +158,5 @@ function post_type_labels( string $singular, string $plural ): array {
 		'not_found_in_trash' => __( 'В корзине ничего нет.', 'reboot-child' ),
 	);
 }
+
+add_action( 'init', __NAMESPACE__ . '\\register_content_types' );
