@@ -249,12 +249,33 @@ body.wp-child-theme-reboot_child .scrolltop:before {
 }
 
 .resume-hero {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
 	display: grid;
 	gap: 1.5rem;
 	align-items: center;
 	padding: 1rem;
 	background: var(--resume-soft);
 	border-radius: var(--resume-radius);
+}
+
+.resume-hero::before {
+	content: "";
+	position: absolute;
+	z-index: 0;
+	top: -30%;
+	left: -8%;
+	width: 46%;
+	height: 90%;
+	background: radial-gradient(closest-side, rgba(15, 118, 110, 0.18), transparent 72%);
+	pointer-events: none;
+}
+
+.resume-hero__copy,
+.resume-hero__media {
+	position: relative;
+	z-index: 1;
 }
 
 .resume-hero__eyebrow,
@@ -264,6 +285,17 @@ body.wp-child-theme-reboot_child .scrolltop:before {
 .resume-fact__label {
 	color: var(--resume-muted);
 	font-size: 0.92rem;
+}
+
+.resume-hero__eyebrow::after {
+	content: "";
+	display: block;
+	width: 2.25rem;
+	height: 2px;
+	margin-top: 0.45rem;
+	border-radius: 999px;
+	background: var(--resume-accent);
+	transform-origin: left center;
 }
 
 .resume-hero__eyebrow,
@@ -310,6 +342,8 @@ body.wp-child-theme-reboot_child .scrolltop:before {
 .resume-hero__media {
 	justify-self: center;
 	width: min(100%, 26rem);
+	overflow: hidden;
+	border-radius: var(--resume-radius);
 }
 
 .resume-hero__photo {
@@ -421,8 +455,13 @@ body.wp-child-theme-reboot_child a.resume-button {
 	gap: 1rem;
 }
 
-.resume-card {
+.resume-card,
+.resume-card__media {
 	overflow: hidden;
+}
+
+.resume-card__media {
+	display: block;
 }
 
 .resume-card__body,
@@ -508,11 +547,25 @@ body.wp-child-theme-reboot_child a.resume-button {
 }
 
 .resume-job {
+	position: relative;
 	display: grid;
 	grid-template-columns: minmax(0, 1fr);
 	gap: 0.9rem;
 	padding: 0 0 1.25rem 1rem;
 	border-left: 2px solid var(--resume-line);
+}
+
+.resume-job::before {
+	content: "";
+	position: absolute;
+	top: 0.45rem;
+	left: 0;
+	width: 0.55rem;
+	height: 0.55rem;
+	border-radius: 50%;
+	background: var(--resume-accent);
+	translate: calc(-50% - 1px) 0;
+	box-shadow: 0 0 0 3px var(--rc-canvas);
 }
 
 .resume-job:has(.resume-job__logo) {
@@ -618,6 +671,10 @@ body.wp-child-theme-reboot_child a.resume-button {
 		--resume-soft: #1c2c3c;
 	}
 
+	body.wp-child-theme-reboot_child .resume-hero::before {
+		background: radial-gradient(closest-side, rgba(47, 158, 143, 0.28), transparent 72%);
+	}
+
 	body.wp-child-theme-reboot_child .resume a:not(.resume-button) {
 		color: #8ed9d0;
 	}
@@ -650,5 +707,253 @@ body.wp-child-theme-reboot_child a.resume-button {
 	body.wp-child-theme-reboot_child .search-screen,
 	body.wp-child-theme-reboot_child .search-screen.open {
 		transform: none;
+	}
+}
+
+/*
+ * Motion follows the 2026 pattern: short, interruptible feedback on controls,
+ * and scroll-linked reveals through animation-timeline. The portrait stays
+ * fully opaque so it can still be the LCP image. Unsupported browsers and
+ * prefers-reduced-motion keep every block in its final state.
+ */
+
+.resume-prose a,
+.resume-contact__list a {
+	text-decoration: none;
+	background-image: linear-gradient(currentColor, currentColor);
+	background-repeat: no-repeat;
+	background-position: 0 100%;
+	background-size: 100% 1px;
+}
+
+.resume-progress {
+	display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.resume-hero__eyebrow,
+	.resume-hero__title,
+	.resume-hero__text,
+	.resume-hero__actions {
+		animation: resume-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+	}
+
+	.resume-hero__title {
+		animation-delay: 0.08s;
+	}
+
+	.resume-hero__text {
+		animation-delay: 0.14s;
+	}
+
+	.resume-hero__actions {
+		animation-delay: 0.2s;
+	}
+
+	.resume-hero__eyebrow::after {
+		animation: resume-draw 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.16s both;
+	}
+
+	.resume-hero__photo {
+		animation: resume-photo-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+	}
+
+	.resume-button {
+		transition: scale 120ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.resume-button:active {
+		scale: 0.98;
+	}
+
+	.resume-prose a,
+	.resume-contact__list a {
+		background-size: 0 1px;
+		transition: background-size 160ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.resume-prose a:hover,
+	.resume-prose a:focus-visible,
+	.resume-contact__list a:hover,
+	.resume-contact__list a:focus-visible {
+		background-size: 100% 1px;
+	}
+
+	.resume-tags a {
+		transition: background-color 120ms linear;
+	}
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+	.resume-button:hover {
+		translate: 0 -1px;
+	}
+
+	.resume-button:active {
+		translate: 0 0;
+	}
+
+	.resume-card,
+	.resume-project,
+	.resume-fact,
+	.resume-education,
+	.resume-skill-group {
+		transition: translate 140ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.resume-card:hover,
+	.resume-project:hover,
+	.resume-fact:hover,
+	.resume-education:hover,
+	.resume-skill-group:hover {
+		translate: 0 -4px;
+	}
+
+	.resume-card__image {
+		transition: scale 180ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.resume-card:hover .resume-card__image {
+		scale: 1.04;
+	}
+
+	.resume-tags a:hover,
+	.resume-tags a:focus-visible {
+		background: var(--resume-line);
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	@supports (animation-timeline: view()) {
+		.resume-fact,
+		.resume-card,
+		.resume-project,
+		.resume-job,
+		.resume-education,
+		.resume-skill-group,
+		.resume-contact,
+		.resume-summary,
+		.resume-cta {
+			animation-name: resume-fade;
+			animation-duration: auto;
+			animation-timing-function: linear;
+			animation-fill-mode: both;
+			animation-timeline: view();
+			animation-range: entry 0% cover 28%;
+		}
+
+		.resume-facts .resume-fact:nth-child(2) {
+			animation-range: entry 0% cover 38%;
+		}
+
+		.resume-facts .resume-fact:nth-child(3) {
+			animation-range: entry 0% cover 48%;
+		}
+
+		.resume-job,
+		.resume-summary,
+		.resume-contact,
+		.resume-cta {
+			animation-name: resume-rise;
+		}
+	}
+
+	@supports (animation-timeline: scroll()) {
+		.resume-progress {
+			display: block;
+			position: fixed;
+			z-index: 1000;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 2px;
+			background: var(--rc-accent);
+			pointer-events: none;
+			transform-origin: left center;
+			animation-name: resume-progress;
+			animation-duration: auto;
+			animation-timing-function: linear;
+			animation-fill-mode: both;
+			animation-timeline: scroll(root block);
+		}
+	}
+}
+
+@keyframes resume-rise {
+	from {
+		opacity: 0;
+		translate: 0 12px;
+	}
+
+	to {
+		opacity: 1;
+		translate: none;
+	}
+}
+
+@keyframes resume-fade {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes resume-draw {
+	from {
+		scale: 0 1;
+	}
+
+	to {
+		scale: 1 1;
+	}
+}
+
+@keyframes resume-photo-in {
+	from {
+		scale: 1.03;
+	}
+
+	to {
+		scale: 1;
+	}
+}
+
+@keyframes resume-progress {
+	from {
+		transform: scaleX(0);
+	}
+
+	to {
+		transform: scaleX(1);
+	}
+}
+
+@media print {
+	.resume-hero__eyebrow,
+	.resume-hero__title,
+	.resume-hero__text,
+	.resume-hero__actions,
+	.resume-hero__photo,
+	.resume-hero__eyebrow::after,
+	.resume-fact,
+	.resume-card,
+	.resume-project,
+	.resume-job,
+	.resume-education,
+	.resume-skill-group,
+	.resume-contact,
+	.resume-summary,
+	.resume-cta {
+		animation: none;
+		opacity: 1;
+		translate: none;
+		scale: none;
+	}
+
+	.resume-progress {
+		display: none;
 	}
 }
