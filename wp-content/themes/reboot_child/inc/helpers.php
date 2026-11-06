@@ -31,6 +31,60 @@ function mod_string( string $key, string $default = '' ): string {
 }
 
 /**
+ * Suggested copy used before the customizer value is saved.
+ *
+ * An empty saved value stays empty. These strings are only the unset fallback.
+ *
+ * @return array<string, string>
+ */
+function text_defaults(): array {
+	return array(
+		'reboot_child_hero_eyebrow'        => __( 'Специалист по мониторингу транспорта', 'reboot-child' ),
+		'reboot_child_hero_text'            => __( 'GNSS/ГЛОНАСС, логистика и операционный контроль.', 'reboot-child' ),
+		'reboot_child_hero_primary_label'   => __( 'Резюме', 'reboot-child' ),
+		'reboot_child_hero_secondary_label' => __( 'Контакты', 'reboot-child' ),
+		'reboot_child_posts_title'          => __( 'Статьи', 'reboot-child' ),
+		'reboot_child_projects_title'       => __( 'Проекты', 'reboot-child' ),
+		'reboot_child_contact_title'        => __( 'Обсудить задачу', 'reboot-child' ),
+	);
+}
+
+/**
+ * Customizer text. A saved empty string hides the phrase; an unsaved key uses the default.
+ *
+ * @param string $key Theme mod key.
+ */
+function mod_text( string $key ): string {
+	$stored = get_theme_mod( $key, null );
+	if ( false === $stored || null === $stored ) {
+		$defaults = text_defaults();
+		return $defaults[ $key ] ?? '';
+	}
+	if ( ! is_string( $stored ) ) {
+		return '';
+	}
+
+	return $stored;
+}
+
+/**
+ * Permalink of a page by slug, cached for the request.
+ *
+ * @param string $slug Page slug.
+ */
+function page_url( string $slug ): string {
+	static $urls = array();
+	if ( isset( $urls[ $slug ] ) ) {
+		return $urls[ $slug ];
+	}
+
+	$page = get_page_by_path( $slug, OBJECT, 'page' );
+	$url  = $page instanceof \WP_Post ? (string) get_permalink( $page ) : '';
+	$urls[ $slug ] = $url;
+	return $url;
+}
+
+/**
  * Read a theme mod as an integer.
  *
  * @param string $key     Theme mod key.

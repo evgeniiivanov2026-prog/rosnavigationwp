@@ -69,6 +69,7 @@ function reboot_child_load_includes() {
 		'/inc/customizer.php',
 		'/inc/cpt.php',
 		'/inc/meta-boxes.php',
+		'/inc/template-tags.php',
 		'/inc/pages.php',
 	);
 

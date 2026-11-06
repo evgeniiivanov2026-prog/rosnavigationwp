@@ -28,7 +28,7 @@ function register_customizer( \WP_Customize_Manager $wp_customize ): void {
 		'reboot_child_panel',
 		array(
 			'title'       => __( 'Сайт-резюме', 'reboot-child' ),
-			'description' => __( 'Тексты главной, резюме и контактов. Шаблоны подключаются отдельно: до этого смена значений на сайте не видна.', 'reboot-child' ),
+			'description' => __( 'Тексты главной, резюме и контактов.', 'reboot-child' ),
 			'priority'    => 160,
 		)
 	);
@@ -75,13 +75,13 @@ function customizer_sections(): array {
 		'reboot_child_hero'    => array(
 			'title'  => __( 'Первый экран', 'reboot-child' ),
 			'fields' => array(
-				'reboot_child_hero_eyebrow'        => field( __( 'Надзаголовок', 'reboot-child' ) ),
-				'reboot_child_hero_title'          => field( __( 'Заголовок', 'reboot-child' ) ),
-				'reboot_child_hero_text'           => field( __( 'Короткий текст', 'reboot-child' ), 'textarea' ),
-				'reboot_child_hero_primary_label'  => field( __( 'Основная кнопка', 'reboot-child' ) ),
-				'reboot_child_hero_primary_url'    => field( __( 'Ссылка основной кнопки', 'reboot-child' ), 'url' ),
-				'reboot_child_hero_secondary_label' => field( __( 'Вторая кнопка', 'reboot-child' ) ),
-				'reboot_child_hero_secondary_url'  => field( __( 'Ссылка второй кнопки', 'reboot-child' ), 'url' ),
+				'reboot_child_hero_eyebrow'         => field( __( 'Надзаголовок', 'reboot-child' ), 'text', text_defaults()['reboot_child_hero_eyebrow'] ),
+				'reboot_child_hero_title'           => field( __( 'Заголовок', 'reboot-child' ) ),
+				'reboot_child_hero_text'            => field( __( 'Короткий текст', 'reboot-child' ), 'textarea', text_defaults()['reboot_child_hero_text'] ),
+				'reboot_child_hero_primary_label'   => field( __( 'Основная кнопка', 'reboot-child' ), 'text', text_defaults()['reboot_child_hero_primary_label'] ),
+				'reboot_child_hero_primary_url'     => field( __( 'Ссылка основной кнопки', 'reboot-child' ), 'url' ),
+				'reboot_child_hero_secondary_label' => field( __( 'Вторая кнопка', 'reboot-child' ), 'text', text_defaults()['reboot_child_hero_secondary_label'] ),
+				'reboot_child_hero_secondary_url'   => field( __( 'Ссылка второй кнопки', 'reboot-child' ), 'url' ),
 				'reboot_child_hero_image'          => field( __( 'Фото', 'reboot-child' ), 'image' ),
 			),
 		),
@@ -92,9 +92,9 @@ function customizer_sections(): array {
 		'reboot_child_sections' => array(
 			'title'  => __( 'Блоки главной', 'reboot-child' ),
 			'fields' => array(
-				'reboot_child_posts_title'    => field( __( 'Заголовок блока статей', 'reboot-child' ) ),
+				'reboot_child_posts_title'    => field( __( 'Заголовок блока статей', 'reboot-child' ), 'text', text_defaults()['reboot_child_posts_title'] ),
 				'reboot_child_posts_count'    => field( __( 'Сколько статей показывать', 'reboot-child' ), 'number', '3' ),
-				'reboot_child_projects_title' => field( __( 'Заголовок блока проектов', 'reboot-child' ) ),
+				'reboot_child_projects_title' => field( __( 'Заголовок блока проектов', 'reboot-child' ), 'text', text_defaults()['reboot_child_projects_title'] ),
 			),
 		),
 		'reboot_child_resume'  => array(
@@ -110,7 +110,7 @@ function customizer_sections(): array {
 		'reboot_child_contact' => array(
 			'title'  => __( 'Контакты', 'reboot-child' ),
 			'fields' => array(
-				'reboot_child_contact_title'    => field( __( 'Заголовок', 'reboot-child' ) ),
+				'reboot_child_contact_title'    => field( __( 'Заголовок', 'reboot-child' ), 'text', text_defaults()['reboot_child_contact_title'] ),
 				'reboot_child_contact_text'     => field( __( 'Текст', 'reboot-child' ), 'textarea' ),
 				'reboot_child_contact_email'    => field( __( 'Эл. почта', 'reboot-child' ), 'email' ),
 				'reboot_child_contact_phone'    => field( __( 'Телефон', 'reboot-child' ) ),
